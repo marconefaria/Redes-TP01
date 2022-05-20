@@ -174,7 +174,7 @@ int removeSensorInEquipment(int sensor_id, int equipment_id, float data[SENSOR_N
 
 int readVariableOfProcess(char msg[], int sensor_id, int equipment_id, float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
 {
-    char aux[16];
+    char aux[32];
     int response = 0;
 
     if ((validateEntry(sensor_id) == INVALID_STRING) || (validateEntry(equipment_id) == INVALID_STRING))
@@ -292,7 +292,7 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
         {
             if (c > 1)
                 strcat(output, " ");
-            int auxRead = readVariableOfProcess(buf, atoi(entries[c]), atoi(entries[entryNumbers - 1]), data);
+            int auxRead = readVariableOfProcess(buf, atoi(entries[c]), atoi(entries[entryNumbers]), data);
             if (auxRead == NO_EXIST)
             {
                 strcat(output, cleanString(entries[c]));
