@@ -223,6 +223,8 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
     else if ((strcmp(ADD, entries[0]) == 0) && (strcmp(SENSOR, entries[1]) == 0))
     {
         char output[BUFSZ] = "";
+        char printed[20] = "";
+
         for (int c = 2; c < entryNumbers - 2; ++c)
         {
             if (c > 2)
@@ -231,12 +233,13 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
             if (auxAdd == EXIST)
             {
                 strcat(output, cleanString(entries[c]));
-                strcat(output, " added");
+                strcpy(printed, "added");
             }
             else if (auxAdd == NO_EXIST)
             {
                 strcat(output, cleanString(entries[c]));
-                strcat(output, " already exists");
+                strcpy(printed, entries[entryNumbers - 1]);
+                strcpy(printed, "already exists in");
             }
             else if (auxAdd == INVALID_EQUIPMENT)
             {
@@ -256,11 +259,13 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
             }
         }
 
-        sprintf(buf, "%s\n", output);
+        sprintf(buf, "sensor %s %s\n", output, printed);
     }
     else if ((strcmp(REMOVE, entries[0]) == 0) && (strcmp(SENSOR, entries[1]) == 0))
     {
         char output[BUFSZ] = "";
+        char printed[20] = "";
+
         int auxRemove = removeSensorInEquipment(atoi(entries[2]), atoi(entries[entryNumbers - 1]), data);
         if (auxRemove == EXIST)
         {
@@ -270,7 +275,8 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
         else if (auxRemove == NO_EXIST)
         {
             strcat(output, cleanString(entries[2]));
-            strcat(output, " does not exist");
+            strcpy(printed, entries[entryNumbers - 1]);
+            strcat(output, " does not exist in");
         }
         else if (auxRemove == INVALID_EQUIPMENT)
         {
@@ -284,7 +290,7 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
         {
             strcat(output, "invalid message");
         }
-        sprintf(buf, "%s\n", output);
+        sprintf(buf, "sensor %s %s\n", output, printed);
     }
     else if ((strcmp(LIST, entries[0]) == 0) && (strcmp(SENSORS, entries[1]) == 0))
     {
