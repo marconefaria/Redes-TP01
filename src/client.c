@@ -63,15 +63,15 @@ int main(int argc, char **argv)
         printf("\n>>>");
         fgets(buf, BUFSZ - 1, stdin);
 
-        count = send(s, buf, strlen(buf), 0); // doesn't send '\0' character
+        count = send(s, buf, strlen(buf), 0);
         if (count != strlen(buf))
         {
             logexit("send");
         }
 
-        memset(buf, 0, BUFSZ); // clears buffer
+        memset(buf, 0, BUFSZ);
         total = 0;
-        count = recv(s, buf + total, BUFSZ - total, 0); // receives data form server
+        count = recv(s, buf + total, BUFSZ - total, 0);
         puts(buf);
         if (count == 0)
         {
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
         total += count;
         memset(buf, 0, BUFSZ);
     }
-    close(s); // closes socket
+    close(s);
 
     printf("received %u bytes\n", total);
 
