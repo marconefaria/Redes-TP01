@@ -239,7 +239,7 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
             {
                 strcat(output, cleanString(entries[c]));
                 strcpy(printed, entries[entryNumbers - 1]);
-                strcpy(printed, "already exists in");
+                strcat(output, " already exists in");
             }
             else if (auxAdd == INVALID_EQUIPMENT)
             {
@@ -259,7 +259,7 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
             }
         }
 
-        sprintf(buf, "sensor %s %s\n", output, printed);
+        sprintf(buf, "sensor %s %s", output, printed);
     }
     else if ((strcmp(REMOVE, entries[0]) == 0) && (strcmp(SENSOR, entries[1]) == 0))
     {
@@ -290,7 +290,7 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
         {
             strcat(output, "invalid message");
         }
-        sprintf(buf, "sensor %s %s\n", output, printed);
+        sprintf(buf, "sensor %s %s", output, printed);
     }
     else if ((strcmp(LIST, entries[0]) == 0) && (strcmp(SENSORS, entries[1]) == 0))
     {
@@ -314,7 +314,6 @@ void handle(char buf[], float data[SENSOR_NUMBER][EQUIPMENT_NUMBER])
             }
             else if (auxRead == NO_EXIST)
             {
-                strcat(output, cleanString(entries[c]));
                 strcat(output, " sensor(s) not intalled");
             }
             else if (auxRead == INVALID_EQUIPMENT)

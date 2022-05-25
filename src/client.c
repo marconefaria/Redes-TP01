@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 
     while (1)
     {
-        printf("\n>>>");
+        printf(">>>");
         fgets(buf, BUFSZ - 1, stdin);
 
         count = send(s, buf, strlen(buf), 0);
